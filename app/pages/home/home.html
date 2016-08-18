@@ -1,0 +1,39 @@
+<ion-navbar *navbar>
+  <ion-title>
+    Home
+  </ion-title>
+  <ion-buttons end>
+    <button (click)="doLogout()">
+            <ion-icon name="contact"></ion-icon>
+            Logout
+        </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content class="home">
+  <ion-item>
+    <ion-row>
+      <ion-col width-80 style="margin-top:8px">
+        <div *ngIf="authInfo">You are logged in as {{authInfo.email}}</div>
+        <div *ngIf="progress !== 0">
+          <progress [(value)]="progress" max="100" width='100%'></progress>
+        </div>
+      </ion-col>
+      <ion-col width-20>
+        <button (click)="doTakePicture()">Add Item</button>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+
+  <ion-card *ngFor="let item of items | async">
+    <ion-card-header>
+      <h2>{{item.owner}}</h2>
+      <h3> {{item.when}}</h3>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="blockUIParent">
+        <img src="{{item.thumb}}" class="blockUIimg" />
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
